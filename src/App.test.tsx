@@ -1,9 +1,18 @@
+import {shallow} from 'enzyme';
 import React from 'react';
-import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+const createTestProps = (props: object) => ({
+  ...props,
+});
+
+describe('App', () => {
+  const props = createTestProps({});
+  const wrapper = shallow<App>(<App {...props} />);
+
+  describe('rendering', () => {
+    it('should render a <View />', () => {
+      expect(wrapper.find('View')).toHaveLength(1);
+    });
+  });
 });
