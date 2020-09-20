@@ -2,9 +2,9 @@ import React from 'react';
 import {Navigation} from 'react-native-navigation';
 import RootWrapper from './rootWrapper/rootWrapper';
 import {Provider} from 'react-redux';
-import { Home } from './home';
-import { MovieDetails } from './movieDetails';
-import { MovieSearch } from './searchResults';
+import {HomeScreen} from '../screens/home/HomeScreen';
+// import { MovieDetails } from './movieDetails';
+// import { MovieSearch } from './searchResults';
 
 
 function wrapWithContextProvider(Comp, screenName = '') {
@@ -27,7 +27,7 @@ function wrapWithContextProvider(Comp, screenName = '') {
 export function registerScreens(store, provider) {
   Navigation.registerComponentWithRedux(
     'moviesApp.Home',
-    () => wrapWithContextProvider(Home),
+    () => wrapWithContextProvider(HomeScreen),
     provider,
     store,
   );

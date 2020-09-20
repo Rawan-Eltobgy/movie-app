@@ -5,9 +5,7 @@ import {
   I18nManager,
   NativeModules,
 } from 'react-native';
-import React from 'react';
 import DeviceInfo from 'react-native-device-info';
-
 
 const {height, width} = Dimensions.get('window');
 
@@ -20,9 +18,7 @@ const helpers = {
       (Platform.OS === 'ios' &&
         !Platform.isPad &&
         !Platform.isTVOS &&
-        (height === 812 ||
-          width === 812 ||
-          height === 896 || width === 896)))
+        (height === 812 || width === 812 || height === 896 || width === 896))
     );
   },
 };

@@ -187,7 +187,7 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
-      compile 'com.android.support:multidex:1.0.3' 
+    implementation 'com.android.support:multidex:1.0.3' 
   //find latest version from here https://developer.android.com/studio/build/multidex
     android {
     defaultConfig {

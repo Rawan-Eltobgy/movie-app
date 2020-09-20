@@ -4,7 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import sagas from './sagas';
 import loading from './modules/loading/reducer';
-import movies from './modules/movies/reducer';
+// import movies from './modules/movies/reducer';
 
 /**
  * create a Saga middleware
@@ -16,7 +16,7 @@ const sagaMiddleware = createSagaMiddleware();
  * Combine and persist reducers
  */
 const reducers = combineReducers({
-  movies,
+  // movies,
   loading,
 });
 
