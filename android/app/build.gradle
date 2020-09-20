@@ -187,6 +187,14 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    implementation 'com.android.support:multidex:1.0.3' 
+  //find latest version from here https://developer.android.com/studio/build/multidex
+    android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+    }
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
@@ -216,4 +224,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
+
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+// apply from: file("../../node_modules/react-native/react.gradle")
+// apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
