@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {TextField, View} from 'react-native-ui-lib';
 import {StyleSheet, TouchableOpacity} from 'react-native';
+import fakeData from './fakeData.json';
+
 import Icon from '@types/react-native-vector-icons';
 
 import {colors} from '../../config/styles';
+import MovieListItem from './components/MovieListItem';
 
 function HomeScreen() {
   const [movieName, setMovieName] = useState('');
@@ -21,7 +24,7 @@ function HomeScreen() {
 
   return (
     <View flex padding-24>
-      <TouchableOpacity
+       <TouchableOpacity
         style={[styles.searchView, styles.shadowInput, styles.roundedInput]}>
         <TextField
           style={styles.inputStyle}
@@ -45,6 +48,7 @@ function HomeScreen() {
           type="evilIcons"
         /> */}
       </TouchableOpacity>
+      <MovieListItem movie={fakeData} />
     </View>
   );
 }
