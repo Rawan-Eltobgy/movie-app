@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {TextField, View, Text} from 'react-native-ui-lib';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 // type MovieProps = {
 //   Title: string;
@@ -15,21 +16,24 @@ import {TextField, View, Text} from 'react-native-ui-lib';
 
 function MovieListItem({movie}) {
   // const {Title, Poster, Released} = movie.movie;
-  console.log('I am a list Item', movie, movie.movie, movie.Poster);
+  const realeaseYear = movie.Released.split(' ')[2];
+
   return (
     <View style={styles.movieItemView}>
       <TouchableOpacity>
-        <Image
-          style={styles.posterView}
-          source={{ uri: `${movie.Poster}` }}
-          resizeMode="stretch"
-        />
-        <View
-          style={{paddingHorizontal: 5, alignItems: 'center', marginTop: 8}}>
-          <Text small bold numberOfLines={1}>
-            {movie.Title}
-          </Text>
-          <Text small>{movie.Released}</Text>
+        <View>
+          <Image
+            style={styles.posterView}
+            source={{uri: `${movie.Poster}`}}
+            resizeMode="stretch"
+          />
+          <View
+            style={{paddingHorizontal: 5, alignItems: 'center', marginTop: 8}}>
+            <Text small bold numberOfLines={1}>
+              {movie.Title}
+            </Text>
+            <Text small>{realeaseYear}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     </View>
@@ -37,7 +41,7 @@ function MovieListItem({movie}) {
 }
 
 const styles = StyleSheet.create({
-  movieItemView:{
+  movieItemView: {
     width: 130,
   },
   posterView: {

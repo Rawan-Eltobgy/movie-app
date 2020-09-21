@@ -6,7 +6,7 @@ import fakeData from './fakeData.json';
 import Icon from '@types/react-native-vector-icons';
 
 import {colors} from '../../config/styles';
-import MovieListItem from './components/MovieListItem';
+import MovieList from './components/MovieList';
 
 function HomeScreen() {
   const [movieName, setMovieName] = useState('');
@@ -23,7 +23,7 @@ function HomeScreen() {
   };
 
   return (
-    <View flex padding-24>
+    <>
        <TouchableOpacity
         style={[styles.searchView, styles.shadowInput, styles.roundedInput]}>
         <TextField
@@ -48,8 +48,8 @@ function HomeScreen() {
           type="evilIcons"
         /> */}
       </TouchableOpacity>
-      <MovieListItem movie={fakeData} />
-    </View>
+      <MovieList data={fakeData} />
+    </>
   );
 }
 const styles = StyleSheet.create({
