@@ -9,29 +9,20 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import 'react-native-gesture-handler';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import HomeScreen from './src/screens/homeScreen/HomeScreen';
+import {NavigationContainer} from '@react-navigation/native';
+
+import {AppContainer} from './src/router';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
-      <HomeScreen />
+    <NavigationContainer>{
+      <AppContainer />
+    }
+    </NavigationContainer>
   );
 };
 
