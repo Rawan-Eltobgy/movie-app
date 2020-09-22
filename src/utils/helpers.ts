@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import {Linking, Platform, Dimensions} from 'react-native';
-import moment from 'moment';
 import ShortId from './shortId';
 
 
