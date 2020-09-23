@@ -1,8 +1,9 @@
 import React from 'react';
 import {Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {useNavigation} from 'react-navigation-hooks';
 import {TextField, View, Text} from 'react-native-ui-lib';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 // type MovieProps = {
 //   Title: string;
 //   Year: string;
@@ -15,12 +16,19 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 // };
 
 function MovieListItem({movie}) {
+  const {navigate} = useNavigation();
   // const {Title, Poster, Released} = movie.movie;
   const realeaseYear = movie.Released.split(' ')[2];
 
   return (
     <View style={styles.movieItemView}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          /* 1. Navigate to the Details route with params */
+          navigate('MovieDetails', {
+            movieDetails: movie,
+          });
+        }}>
         <View>
           <Image
             style={styles.posterView}

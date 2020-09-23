@@ -1,30 +1,31 @@
 import React from 'react';
 import {StyleSheet, FlatList} from 'react-native';
 import {Text, View} from 'react-native-ui-lib';
+import helpers from '../../../utils/helpers';
+import { colors } from '../../../config/styles';
 
 const MovieTags = ({tags}) => {
   let loading = false;
-  const _renderItem = ({tag, index}) => {
-    
+
+  const _renderItem = ({item, index}) => {
     return (
-      <View
-        style={styles.tag}>
-        <Text bold mLeft={10}>
-          {tag}
+      <View style={styles.tag}>
+        <Text bold style={styles.tagText} mLeft={10}>
+          {item}
         </Text>
       </View>
     );
   };
 
-  const getKey = (item) => {
+  const _getKey = (item) => {
     //TODO: add loading
     return helpers.generateShortId();
   };
 
   return (
     <FlatList
-      data={loading ? ['', '', ''] : data}
-      keyExtractor={getKey}
+      data={loading ? ['', '', ''] : tags}
+      keyExtractor={_getKey}
       renderItem={_renderItem}
       contentContainerStyle={styles.container}
       style={styles.list}
@@ -44,16 +45,20 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   tag: {
-    backgroundColor: 'red',
+    backgroundColor: colors.primary,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 20,
+    paddingHorizontal: 15,
     paddingVertical: 5,
     borderRadius: 10,
     marginRight: 10,
     marginBottom: 20,
   },
+  tagText:{
+    textShadowColor:'blue',
+    color: 'white',
+    fontWeight: 'bold',
+  }
 });
 
 export default MovieTags;
