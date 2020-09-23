@@ -23,7 +23,7 @@ function HomeScreen() {
   };
 
   return (
-    <View margin-15 flex>
+    <View marginH-15 marginV-50 flex>
       <TouchableOpacity
         style={[styles.searchView, styles.shadowInput, styles.roundedInput]}>
         <TextField
