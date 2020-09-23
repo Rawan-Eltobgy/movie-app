@@ -16,7 +16,7 @@ import appSettings from '../../../config/settings';
  * fetch movies saga
  * @param action
  */
-export const fetchMoviesAsync = function* (action) {
+export const fetchMoviesAsync = function* (action: {payload: any}) {
   let params = action.payload;
   let page = params.page || 0;
   console.log('url: ', appSettings.MOVIES_BASE_URL);
@@ -25,39 +25,40 @@ export const fetchMoviesAsync = function* (action) {
   console.log('url FINAL: ', url);
 
   try {
-    yield put({
-      // type: setLoading,
-      payload: {key, value: true},
-    });
+    // yield put({
+    //   // type: setLoading,
+    //   payload: {key, value: true},
+    // });
 
     const response = yield call(axios.get, url, params);
-    console.log("response in fetch movies", response);
+    console.log('response in fetch movies', response);
     const result = response.json();
 
     yield all([
       put({
         type: actions.fetchMoviesSuccess,
         payload: result.Search,
+        page: params.page,
       }),
-      put({
-        // type: setLoading, 
-        payload: {key, value: false}}),
+      // put({
+      //   // type: setLoading,
+      //   payload: {key, value: false}}),
     ]);
   } catch (e) {
     console.log('error: ', e);
     let msg = '';
     if (e.response) {
       const data = e.response.data;
-      console.log("error: ",data);
+      console.log('error: ', data);
     } else {
       msg = e.message;
     }
 
     yield all([
       put({type: actions.fetchMoviesFailed, payload: msg}),
-      put({
-        // type: setLoading, 
-        payload: {key, value: false}}),
+      //   put({
+      //     // type: setLoading,
+      //     payload: {key, value: false}}),
     ]);
   }
 };
