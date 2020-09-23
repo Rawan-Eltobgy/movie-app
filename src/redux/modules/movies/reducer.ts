@@ -17,6 +17,7 @@ const initialState = {
   //   nbHits: 0,
   //   npPages: 0,
   // },
+  page: 1,
   movies: [],
 };
 
@@ -36,14 +37,14 @@ const moviesReducer = handleActions(
 
     [actions.fetchMoviesSuccess.toString()]: (state, action) => {
       const payload = action.payload;
-      console.log('Payload results: ', payload);
+      const currentPage = action.page;
       //TODO add paginating
-      // let newData = payload.page === 0 ? payload.movies : [...state.data, ...payload.movies]
-      let newData = payload.movies;
+      let newData = currentPage === 1 ? payload : [...payload];
+      console.log("newData, ",newData, currentPage);
       return {
         ...state,
         movies: newData,
-        // npPages: payload.npPages,
+        page: currentPage,
         // total: payload.nbHits,
         // loading: false ,
       };

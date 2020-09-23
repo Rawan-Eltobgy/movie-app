@@ -18,10 +18,10 @@ import settings from '../../../config/env/staging';
  */
 export const fetchMoviesAsync = function* (action: {payload: any}) {
   let params = action.payload;
-  let page = params.page || 0;
+  let page = params.page || 1;
   console.log('url: ', settings.MOVIES_BASE_URL);
   const key = 'fetchMovies';
-  let url = `${settings.MOVIES_BASE_URL}/?s=${params.inputValue}&page=${page}&apikey=${settings.OMDb_API_KEY}`;
+  let url = `${settings.MOVIES_BASE_URL}?s=${params.inputValue}&page=${page}&apikey=${settings.OMDb_API_KEY}`;
   console.log('url FINAL: ', url);
 
   try {
@@ -31,14 +31,14 @@ export const fetchMoviesAsync = function* (action: {payload: any}) {
     // });
 
     const response = yield call(axios.get, url, params);
-    console.log('response in fetch movies', response);
-    const result = response.json();
+    console.log('response in fetch movies', response, response.Search);
+    let result = response.data;
 
     yield all([
       put({
         type: actions.fetchMoviesSuccess,
         payload: result.Search,
-        page: params.page,
+        page: page,
       }),
       // put({
       //   // type: setLoading,

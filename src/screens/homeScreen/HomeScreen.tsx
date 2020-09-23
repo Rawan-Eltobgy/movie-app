@@ -1,25 +1,28 @@
 import React, {useState} from 'react';
 import {TextField, View} from 'react-native-ui-lib';
 import {StyleSheet, TouchableOpacity} from 'react-native';
+import {bindActionCreators} from 'redux';
+import {useDispatch} from 'react-redux';
 import fakeData from './fakeData.json';
 
 import Icon from 'react-native-vector-icons';
-
 import {colors} from '../../config/styles';
 import MovieList from './components/MovieList';
+import {
+  fetchMovies
+} from '../../redux/modules/movies/actionTypes'; 
 
 function HomeScreen() {
   const [movieName, setMovieName] = useState('');
 
-  const onSearch = (event: {
-    nativeEvent: {text: React.SetStateAction<string>};
-  }) => {
-    setMovieName(event.nativeEvent.text);
-    // {
-    //   movieName && this.props.search({
-    //     'name': movieName,
-    //   });
-    // }
+  const dispatch = useDispatch();
+
+  const onTyping = (movieCurrentName: React.SetStateAction<string>) => {
+    setMovieName(movieCurrentName);
+  };
+
+  const onSearch = () => {
+    dispatch(fetchMovies({inputValue: movieName}));
   };
 
   return (
@@ -33,9 +36,10 @@ function HomeScreen() {
           enableErrors={false}
           hideUnderline
           placeholderTextColor="#bbb"
-          onChange={(event: any) => {
-            onSearch(event);
+          onChangeText={(event: any) => {
+            onTyping(event);
           }}
+          onSubmitEditing={onSearch}
           returnKeyType="search"
           // onSubmitEditing={}
           clearButtonMode="while-editing"
