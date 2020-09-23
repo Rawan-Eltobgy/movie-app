@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 // import {setLoading} from '../loading/actions';
 import * as actions from './actionTypes';
-import appSettings from '../../../config/settings';
+import settings from '../../../config/env/staging';
 
 /**
  * fetch movies saga
@@ -19,9 +19,9 @@ import appSettings from '../../../config/settings';
 export const fetchMoviesAsync = function* (action: {payload: any}) {
   let params = action.payload;
   let page = params.page || 0;
-  console.log('url: ', appSettings.MOVIES_BASE_URL);
+  console.log('url: ', settings.MOVIES_BASE_URL);
   const key = 'fetchMovies';
-  let url = `${appSettings.MOVIES_BASE_URL}/?s=${params.inputValue}&page=${page}&apikey=${appSettings.OMDb_API_KEY}`;
+  let url = `${settings.MOVIES_BASE_URL}/?s=${params.inputValue}&page=${page}&apikey=${settings.OMDb_API_KEY}`;
   console.log('url FINAL: ', url);
 
   try {

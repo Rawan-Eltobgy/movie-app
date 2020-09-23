@@ -10,21 +10,20 @@
 
 import React from 'react';
 import 'react-native-gesture-handler';
-
+import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {AppContainer} from './src/router';
+import store from './src/redux';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
-    <NavigationContainer>{
-      <AppContainer />
-    }
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>{<AppContainer />}</NavigationContainer>
+    </Provider>
   );
 };
-
 
 export default App;

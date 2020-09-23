@@ -21,7 +21,7 @@ const initialState = {
 };
 
 /**
- * Represents a networkReducer - specify how the state changes.
+ * Represents a movies reducer.
  * @param {object} actions.
  * @param {object} initial state.
  * @return {object} reducer
