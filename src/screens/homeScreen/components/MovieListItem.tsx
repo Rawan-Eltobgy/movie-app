@@ -8,15 +8,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import settings from '../../../config/env/staging';
 
-interface IsMovie {
-  Title: string;
-  Poster?: string;
-  Year?: string;
-}
-
 function MovieListItem({movie}: Object) {
   const {navigate} = useNavigation();
-
 
   fetchMovieDetails = () => {
     axios
@@ -25,14 +18,12 @@ function MovieListItem({movie}: Object) {
       )
       .then(
         (response: {data: React.SetStateAction<{}>}) => {
-          console.log(response.data);
-          console.log("why here")
           navigate('MovieDetails', {
             movieDetails: response.data,
           });
         },
         (error: any) => {
-          Alert.alert('An Error Happened', {error}, {cancelable: true});
+          return Alert.alert('An Error Happened', {error}, {cancelable: true});
         },
       );
   };

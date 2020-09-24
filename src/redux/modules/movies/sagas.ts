@@ -1,11 +1,8 @@
-import {Platform, NativeModules} from 'react-native';
 import {
   put,
   takeEvery,
-  takeLatest,
   call,
   all,
-  select,
 } from 'redux-saga/effects';
 import axios from 'axios';
 // import {setLoading} from '../loading/actions';
@@ -19,10 +16,8 @@ import settings from '../../../config/env/staging';
 export const fetchMoviesAsync = function* (action: {payload: any}) {
   let params = action.payload;
   let page = params.page || 1;
-  console.log('url: ', settings.MOVIES_BASE_URL);
   const key = 'fetchMovies';
   let url = `${settings.MOVIES_BASE_URL}?s=${params.inputValue}&page=${page}&apikey=${settings.OMDb_API_KEY}`;
-  console.log('url FINAL: ', url);
 
   try {
     // yield put({
@@ -49,7 +44,6 @@ export const fetchMoviesAsync = function* (action: {payload: any}) {
     let msg = '';
     if (e.response) {
       const data = e.response.data;
-      console.log('error: ', data);
     } else {
       msg = e.message;
     }

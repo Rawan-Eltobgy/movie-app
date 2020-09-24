@@ -10,7 +10,6 @@ import fakeData from '../homeScreen/fakeData.json';
 
 function SearchResults() {
   const resultMovies = useSelector((state) => state.movies.movies);
-  console.log('state o redux ', resultMovies);
 
   return (
     <View marginH-15 marginV-50 flex>

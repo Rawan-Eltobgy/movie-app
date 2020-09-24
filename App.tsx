@@ -16,8 +16,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {AppContainer} from './src/router';
 import store from './src/redux';
 
-declare const global: {HermesInternal: null | {}};
-console.log('store: ', store);
 const App = () => {
   return (
     <NavigationContainer>

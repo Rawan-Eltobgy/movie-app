@@ -43,7 +43,6 @@ function HomeScreen() {
           }}
           onSubmitEditing={onSearch}
           returnKeyType="search"
-          // onSubmitEditing={}
           clearButtonMode="while-editing"
         />
         {/* <Icon

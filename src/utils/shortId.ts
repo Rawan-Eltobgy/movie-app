@@ -20,10 +20,10 @@ export default function shortUniqueId(options) {
   this.dict = [];
 
   /**
-     * Check if environment has `console`, if so pass arguments along to its `log` function.
-     * Logging is optionally enabled by passing `debug=true` during instantiation.
-     * @param {Object} args Any list of objects.
-     */
+   * Check if environment has `console`, if so pass arguments along to its `log` function.
+   * Logging is optionally enabled by passing `debug=true` during instantiation.
+   * @param {Object} args Any list of objects.
+   */
   this.log = function log(...args) {
     args[0] = `[short-unique-id] ${args[0]}`;
     /* eslint-disable no-console */
@@ -32,27 +32,26 @@ export default function shortUniqueId(options) {
         return console.log(...args);
       }
     }
-    /* eslint-enable no-console */
     return undefined;
   };
 
   /**
-     * Returns generator's internal dictionary.
-     */
+   * Returns generator's internal dictionary.
+   */
   this.getDict = function getDict() {
     return this.dict;
   };
 
   /**
-     * Generates UUID based on internal counter that's incremented after each ID generation.
-     */
+   * Generates UUID based on internal counter that's incremented after each ID generation.
+   */
   this.sequentialUUID = function sequentialUUID() {
     let counterDiv;
     let counterRem;
     let id;
     id = '';
     counterDiv = this.counter;
-    /* eslint-disable no-constant-condition */
+
     while (true) {
       counterRem = counterDiv % self.dictLength;
       counterDiv = parseInt(counterDiv / self.dictLength, 10);
@@ -61,15 +60,14 @@ export default function shortUniqueId(options) {
         break;
       }
     }
-    /* eslint-enable no-constant-condition */
     this.counter += 1;
     return id;
   };
 
   /**
-     * Generates UUID by creating each part randomly.
-     * @param {Integer} uuidLength Desired UUID length.
-     */
+   * Generates UUID by creating each part randomly.
+   * @param {Integer} uuidLength Desired UUID length.
+   */
   this.randomUUID = function randomUUID(uuidLength) {
     let id;
     let randomPartIdx;
@@ -77,19 +75,26 @@ export default function shortUniqueId(options) {
     if (uuidLength === null || typeof uuidLength === 'undefined') {
       uuidLength = this.DEFAULT_RANDOM_ID_LEN;
     }
-    if ((uuidLength === null || typeof uuidLength === 'undefined') || uuidLength < 1) {
+    if (
+      uuidLength === null ||
+      typeof uuidLength === 'undefined' ||
+      uuidLength < 1
+    ) {
       throw new Error('Invalid UUID Length Provided');
     }
 
     // Generate random ID parts from Dictionary.
-    /* eslint-disable */
-      let idIndex;
-      id = '';
-      for (idIndex = _j = 0; 0 <= uuidLength ? _j < uuidLength : _j > uuidLength; idIndex = 0 <= uuidLength ? ++_j : --_j) {
-        randomPartIdx = parseInt(Math.random() * self.dictLength) % self.dictLength;
-        id += self.dict[randomPartIdx];
-      }
-      /* eslint-enable */
+    let idIndex;
+    id = '';
+    for (
+      idIndex = _j = 0;
+      uuidLength >= 0 ? _j < uuidLength : _j > uuidLength;
+      idIndex = uuidLength >= 0 ? ++_j : --_j
+    ) {
+      randomPartIdx =
+        parseInt(Math.random() * self.dictLength) % self.dictLength;
+      id += self.dict[randomPartIdx];
+    }
 
     // Return random generated ID.
     return id;
@@ -119,5 +124,5 @@ export default function shortUniqueId(options) {
   }
   this.counter = 0;
   this.debug = options.debug;
-  this.log((`Generator created with Dictionary Size ${this.dictLength}`));
+  this.log(`Generator created with Dictionary Size ${this.dictLength}`);
 }

@@ -4,7 +4,6 @@ import {createAppContainer} from 'react-navigation';
 import HomeScreen from '../screens/homeScreen/HomeScreen';
 import MovieDetails from '../screens/movieDetails/MovieDetails';
 import SearchResults from '../screens/searchResults/SearchResults';
-import {CustomBack} from './CustomBack';
 import {colors} from '../config/styles';
 
 const MainNavigator = createStackNavigator(
@@ -24,7 +23,6 @@ const MainNavigator = createStackNavigator(
     defaultNavigationOptions: {
       headerTransparent: true,
       headerTitle: '',
-      // headerBackImage: CustomBack,
       headerTruncatedBackTitle: '',
       headerStyle: {
         height: 60,
