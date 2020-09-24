@@ -5,7 +5,11 @@ import ListView from '../../../components/ListView';
 import helpers from '../../../utils/helpers';
 import MovieListItem from './MovieListItem';
 
-function MovieList({data}: any) {
+type MovieListProps = {
+  data?: Array<Object>;
+};
+
+function MovieList({data}: MovieListProps) {
   return (
     <View>
       {data ? (
