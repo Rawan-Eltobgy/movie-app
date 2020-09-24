@@ -30,6 +30,7 @@ const initialState = {
 
 const moviesReducer = handleActions(
   {
+    //All movies 
     [actions.fetchMovies.toString()]: (state) => ({
       ...state,
       // movies: action.payload,
@@ -49,8 +50,6 @@ const moviesReducer = handleActions(
         // loading: false ,
       };
     },
-
-    ////
     [actions.fetchMoviesFailed.toString()]: (state, {payload}) => ({
       ...state,
       error: payload,

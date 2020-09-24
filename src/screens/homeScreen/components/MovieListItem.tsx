@@ -1,33 +1,45 @@
-import React from 'react';
-import {Image, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Alert, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import axios from 'axios';
 import {useNavigation} from 'react-navigation-hooks';
 import {TextField, View, Text} from 'react-native-ui-lib';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-// type MovieProps = {
-//   Title: string;
-//   Year: string;
-//   Rated: string;
-//   Ratings?: Array<object>;
-//   Released: string;
-//   Runtime: string;
-//   Genre: string;
-//   Poster: string;
-// };
 
-function MovieListItem({movie}) {
+import settings from '../../../config/env/staging';
+
+interface IsMovie {
+  Title: string;
+  Poster?: string;
+  Year?: string;
+}
+
+function MovieListItem({movie}: Object) {
   const {navigate} = useNavigation();
-  // const {Title, Poster, Released} = movie.movie;
+
+
+  fetchMovieDetails = () => {
+    axios
+      .get(
+        `${settings.MOVIES_BASE_URL}?t=${movie.Title}&apikey=${settings.OMDb_API_KEY}`,
+      )
+      .then(
+        (response: {data: React.SetStateAction<{}>}) => {
+          console.log(response.data);
+          console.log("why here")
+          navigate('MovieDetails', {
+            movieDetails: response.data,
+          });
+        },
+        (error: any) => {
+          Alert.alert('An Error Happened', {error}, {cancelable: true});
+        },
+      );
+  };
 
   return (
     <View style={styles.movieItemView}>
-      <TouchableOpacity
-        onPress={() => {
-          /* 1. Navigate to the Details route with params */
-          navigate('MovieDetails', {
-            movieDetails: movie,
-          });
-        }}>
+      <TouchableOpacity onPress={fetchMovieDetails}>
         <View>
           <Image
             style={styles.posterView}
