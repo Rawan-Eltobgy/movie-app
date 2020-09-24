@@ -1,4 +1,5 @@
 import React from 'react';
+import {Text, View} from 'react-native-ui-lib';
 
 import ListView from '../../../components/ListView';
 import helpers from '../../../utils/helpers';
@@ -6,14 +7,22 @@ import MovieListItem from './MovieListItem';
 
 function MovieList({data}: any) {
   return (
-    <ListView
-      data={data}
-      title="Creator Selected Movies"
-      onViewAllPress={() => {}}
-      keyExtractor={() => helpers.generateShortId()}
-      subtitle="You can customize yours"
-      renderItem={({item}) => <MovieListItem movie={item} />}
-    />
+    <View>
+      {data ? (
+        <ListView
+          data={data}
+          title="Creator Selected Movies"
+          onViewAllPress={() => {}}
+          keyExtractor={() => helpers.generateShortId()}
+          subtitle="You can customize yours"
+          renderItem={({item}) => <MovieListItem movie={item} />}
+        />
+      ) : (
+        <View flex center margin-60>
+        <Text>No results found !</Text>
+        </View>
+      )}
+    </View>
   );
 }
 
