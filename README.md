@@ -22,9 +22,9 @@
 * MovieDetails Screen -> shows film details: poster, title, genres, director, plot, cast and ratings. Include a back button in the navigation bar.
 * SearchResults Screen -> contains the resulted from the search movies with a poster, title, year for each movie item.
 
-![HomeScreen](https://github.com/Rawan-Eltobgy/movie-app/master/screenshots/homeScreen.png)
-![MovieDetails](https://github.com/Rawan-Eltobgy/movie-app/master/screenshots/movieDetails.png)
-![SearchResults](https://github.com/Rawan-Eltobgy/movie-app/master/screenshots/searchResults.png)
+![HomeScreen](./screenshots/homeScreen.png)
+![MovieDetails](./screenshots/movieDetails.png)
+![SearchResults](./screenshots/searchResults.png)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
