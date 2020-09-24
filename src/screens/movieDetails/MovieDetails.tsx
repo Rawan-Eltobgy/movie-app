@@ -1,6 +1,12 @@
 import React, {useEffect, useRef} from 'react';
 import {View, Text} from 'react-native-ui-lib';
-import {Animated, StyleSheet, FlatList,ScrollView, Dimensions} from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+  Dimensions,
+} from 'react-native';
 import {useNavigationParam} from 'react-navigation-hooks';
 
 import MovieTags from './components/MovieTags';
@@ -10,13 +16,9 @@ import {height, width} from '../../utils/helpers';
 function MovieDetails() {
   const movie = useNavigationParam('movieDetails');
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  // useEffect(() => {
-  //   fadeIn();
-  //   // return () => {
-  //   // }
-  // },)
+
   const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
+    // Will change fadeAnim value to 1 in 2.5 seconds
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 2500,
@@ -41,64 +43,66 @@ function MovieDetails() {
 
   return (
     <ScrollView>
-    <View flex marginH-25 marginT-50>
-      <View style={{overflow: 'scroll'}}>
-        <Animated.Image
-          onLoadEnd={() => fadeIn()}
-          source={{uri: `${movie.Poster}`}}
-          style={[
-            styles.posterView,
-            {
-              opacity: fadeAnim,
-              overflow: 'hidden',
-            },
-          ]}
-        />
-        <View margin-10 style={styles.titleView}>
-          <Text style={styles.titleTxt}>{movie.Title.trim()}</Text>
-          {/*To fix the added line issue */}
-          <Text style={styles.releaseTxt}>{`(${realeaseYear})`}</Text>
-        </View>
-        <MovieTags tags={movieGenres} />
-        {renderHorizontalMargin()}
-        <FlatList
-          data={movie.Ratings}
-          renderItem={({item, index}) => (
-            <View flex row marginH-10 style={styles.ratingItem}>
-              <View flex center column>
-                <Text> {item.Value}</Text>
-                <Text> {item.Source}</Text>
+      <View flex marginH-25 marginT-50>
+        <View style={{overflow: 'scroll'}}>
+          <Animated.Image
+            onLoadEnd={() => fadeIn()}
+            source={{uri: `${movie.Poster}`}}
+            style={[
+              styles.posterView,
+              {
+                opacity: fadeAnim,
+                overflow: 'hidden',
+              },
+            ]}
+          />
+          <View margin-10 style={styles.titleView}>
+            <Text style={styles.titleTxt}>{movie.Title.trim()}</Text>
+            {/*To fix the added line issue */}
+            <Text style={styles.releaseTxt}>
+              {`(${realeaseYear})` || movie.Released}
+            </Text>
+          </View>
+          <MovieTags tags={movieGenres} />
+          {renderHorizontalMargin()}
+          <FlatList
+            data={movie.Ratings}
+            renderItem={({item, index}) => (
+              <View flex row marginH-10 style={styles.ratingItem}>
+                <View flex center column>
+                  <Text> {item.Value}</Text>
+                  <Text> {item.Source}</Text>
+                </View>
+                {index + 1 !== movie.Ratings.length && (
+                  <View
+                    style={{
+                      height: 100,
+                      width: 5,
+                      backgroundColor: colors.primary,
+                      marginHorizontal: 15,
+                    }}
+                  />
+                )}
               </View>
-              {index + 1 !== movie.Ratings.length && (
-                <View
-                  style={{
-                    height: 100,
-                    width: 5,
-                    backgroundColor: colors.primary,
-                    marginHorizontal: 15,
-                  }}
-                />
-              )}
-            </View>
-          )}
-          columnWrapperStyle={styles.ratingRow}
-          numColumns={3}
-          // keyExtractor={(item, index) => index}
-        />
-        {renderHorizontalMargin()}
-        <View style={styles.plot}>
-          <Text style={styles.plotTxt}>{movie.Plot}</Text>
-        </View>
-        <Text style={styles.subTxt}> Cast </Text>
-        <View style={styles.plot}>
-          <Text style={styles.plotTxt}>{movie.Actors}</Text>
-        </View>
-        <Text style={styles.subTxt}> Directed By </Text>
-        <View style={styles.plot}>
-          <Text style={styles.plotTxt}>{movie.Director}</Text>
+            )}
+            columnWrapperStyle={styles.ratingRow}
+            numColumns={3}
+            // keyExtractor={(item, index) => index}
+          />
+          {renderHorizontalMargin()}
+          <View style={styles.plot}>
+            <Text style={styles.plotTxt}>{movie.Plot}</Text>
+          </View>
+          <Text style={styles.subTxt}> Cast </Text>
+          <View style={styles.plot}>
+            <Text style={styles.plotTxt}>{movie.Actors}</Text>
+          </View>
+          <Text style={styles.subTxt}> Directed By </Text>
+          <View style={styles.plot}>
+            <Text style={styles.plotTxt}>{movie.Director}</Text>
+          </View>
         </View>
       </View>
-    </View>
     </ScrollView>
   );
 }
