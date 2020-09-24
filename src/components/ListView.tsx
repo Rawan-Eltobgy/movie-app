@@ -4,6 +4,16 @@ import {View, Text} from 'react-native-ui-lib';
 
 import {colors} from '../config/styles';
 
+type ListViewProps = {
+  data: Array<Object>;
+  title?: string;
+  subtitle?: string;
+  renderItem: (data: any) => any;
+  keyExtractor: (data: any) => any;
+  onViewAllPress?: (data: any) => any;
+  searchResults?: boolean;
+};
+
 const ListView = ({
   data,
   title,
@@ -12,7 +22,7 @@ const ListView = ({
   keyExtractor,
   onViewAllPress,
   searchResults,
-}) => {
+}: ListViewProps) => {
   return (
     <View marginV-20>
       <View row center paddingH-16>
