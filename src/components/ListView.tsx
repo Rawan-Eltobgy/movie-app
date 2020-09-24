@@ -11,6 +11,7 @@ const ListView = ({
   renderItem,
   keyExtractor,
   onViewAllPress,
+  searchResults,
 }) => {
   return (
     <View marginV-20>
@@ -29,16 +30,29 @@ const ListView = ({
           </View>
         )}
       </View>
-      <FlatList
-        data={data}
-        horizontal
-        renderItem={renderItem}
-        style={{marginTop: 10}}
-        keyExtractor={keyExtractor}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.containerContentStyle}
-        ItemSeparatorComponent={() => <View marginH-15 />}
-      />
+      {searchResults ? (
+        <FlatList
+          data={data}
+          numColumns={3}
+          renderItem={renderItem}
+          style={{marginTop: 10}}
+          keyExtractor={keyExtractor}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.containerContentStyle}
+          ItemSeparatorComponent={() => <View marginH-15 />}
+        />
+      ) : (
+        <FlatList
+          data={data}
+          horizontal
+          renderItem={renderItem}
+          style={{marginTop: 10}}
+          keyExtractor={keyExtractor}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.containerContentStyle}
+          ItemSeparatorComponent={() => <View marginH-15 />}
+        />
+      )}
     </View>
   );
 };

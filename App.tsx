@@ -17,12 +17,16 @@ import {AppContainer} from './src/router';
 import store from './src/redux';
 
 declare const global: {HermesInternal: null | {}};
-
+console.log('store: ', store);
 const App = () => {
   return (
-    <Provider store={store}>
-      <NavigationContainer>{<AppContainer />}</NavigationContainer>
-    </Provider>
+    <NavigationContainer>
+      {
+        <Provider store={store}>
+          <AppContainer />
+        </Provider>
+      }
+    </NavigationContainer>
   );
 };
 

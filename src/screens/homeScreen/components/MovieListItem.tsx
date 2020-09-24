@@ -18,7 +18,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 function MovieListItem({movie}) {
   const {navigate} = useNavigation();
   // const {Title, Poster, Released} = movie.movie;
-  const realeaseYear = movie.Released.split(' ')[2];
 
   return (
     <View style={styles.movieItemView}>
@@ -40,7 +39,7 @@ function MovieListItem({movie}) {
             <Text small bold numberOfLines={1}>
               {movie.Title}
             </Text>
-            <Text small>{realeaseYear}</Text>
+            <Text small>{movie.Year}</Text>
           </View>
         </View>
       </TouchableOpacity>

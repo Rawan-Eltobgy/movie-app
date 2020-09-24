@@ -1,28 +1,30 @@
 import React, {useState} from 'react';
 import {TextField, View} from 'react-native-ui-lib';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {bindActionCreators} from 'redux';
+import {useNavigation} from 'react-navigation-hooks';
 import {useDispatch} from 'react-redux';
 import fakeData from './fakeData.json';
 
 import Icon from 'react-native-vector-icons';
 import {colors} from '../../config/styles';
 import MovieList from './components/MovieList';
-import {
-  fetchMovies
-} from '../../redux/modules/movies/actionTypes'; 
+import {fetchMovies} from '../../redux/modules/movies/actionTypes';
 
 function HomeScreen() {
   const [movieName, setMovieName] = useState('');
 
   const dispatch = useDispatch();
+  const {navigate} = useNavigation();
 
   const onTyping = (movieCurrentName: React.SetStateAction<string>) => {
     setMovieName(movieCurrentName);
   };
 
   const onSearch = () => {
-    dispatch(fetchMovies({inputValue: movieName}));
+    if (movieName.length > 2) {
+      dispatch(fetchMovies({inputValue: movieName}));
+      navigate('SearchResults');
+    }
   };
 
   return (
